@@ -69,6 +69,7 @@ SONARR_SYSTEM_STATUS = "/api/system/status"
 SONARR_SERIES = "/api/series"
 SONARR_SERIES_LOOKUP = "/api/series/lookup"
 OMBI_SYSTEM_STATUS = "/api/v1/Status/"
+PLEX_IDENTITY = "/identity"
 
 ####################
 # CHECKER MESSAGES #
@@ -192,6 +193,14 @@ ACCOUNT_REGISTER_UPGRADE = "Do you want to be notified when content you watch is
 ACCOUNT_REGISTER_START = "Welcome to {}, let's get you registered so you can start using me!\n\n"+ACCOUNT_REGISTER_DETAIL
 ACCOUNT_REGISTER_FAIL_REGISTERED = "_Looks like you're already registered!_\n\nUse /account to get the current status of your account."
 ACCOUNT_REGISTER_FAIL_CANCELLED = "_Registration has been cancelled._\n\nUse /register to start the registration process again."
+
+
+###################
+# /STATUS COMMAND #
+###################
+
+STATUS_PLEX_WENT_OFFLINE = "_Plex Media Server is offline_"
+STATUS_PLEX_WENT_ONLINE = "_Plex Media Server is online_"
 
 ####################
 # /UNWATCH COMMAND #

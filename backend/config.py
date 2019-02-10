@@ -3,7 +3,7 @@ import sys
 
 from colored import stylize
 from backend import constants, logger
-from backend.api import telegram, sonarr, radarr, ombi
+from backend.api import telegram, sonarr, radarr, ombi, plex
 
 parser = None
 
@@ -29,6 +29,7 @@ def parseConfig():
     parseGeneral()
     parseTelegram()
     parseOmbi()
+    parsePlex()
     parseRadarr()
     parseSonarr()
     parseAdmins()
@@ -111,6 +112,23 @@ def parseOmbi():
         logger.error(__name__, "Failed to initialize Ombi's API: Check your config.ini")
         exit()
     
+def parsePlex():
+    if('PLEX' in parser):
+        if(parser.getboolean('PLEX', 'ENABLED')):
+            plex.enabled = True
+            plex.host = parser['PLEX']['HOST']
+            plex.plex_pass = parser.getboolean('PLEX', 'PLEX_PASS')
+            plex.notification = parser.getboolean('PLEX', 'STATUS_NOTIFY')
+            version = plex.getVersion()
+            if(version):
+                logger.info(__name__, "Plex connection established [{}]".format(version))
+                plex.state = True
+            else:
+                logger.error(__name__, "Plex is unreachable, however the bot will continue...")
+                plex.state = False
+    else:
+        logger.error(__name__, "Failed to initialize Plex connection: Check your config.ini")
+        exit()
 
 # Telegram API parsing
 def parseTelegram():

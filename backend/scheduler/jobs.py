@@ -1,5 +1,5 @@
 from backend.api import telegram, sonarr, radarr
-from backend.scheduler.tasks import catalogue, notify
+from backend.scheduler.tasks import catalogue, notify, heartbeat
 from backend import constants, logger
 import time
 
@@ -20,6 +20,7 @@ def addDefaultJobs():
         addRepeatingJob(catalogue.updateMovies, constants.minutesToSeconds(radarr.update_frequency))
     addRepeatingJob(notify.notifyDaily, constants.hoursToSeconds(24), notify.secondsToDaily())
     addRepeatingJob(notify.notifyWeekly, constants.daysToSeconds(7), notify.secondsToWeekly())
+    addRepeatingJob(heartbeat.healthCheck, 60, 60)
 
 # Creates a repeating job, which will call <func> every <delay> seconds, with the first execution happening after <first> seconds
 def addRepeatingJob(func, delay, first=0):

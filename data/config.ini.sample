@@ -10,6 +10,12 @@ BOT_TOKEN =
 AUTO_ADMINS = 
 AUTO_APPROVE = no
 
+[PLEX]
+ENABLED = no
+PLEX_PASS = no
+STATUS_NOTIFY = no
+HOST = http://localhost:32400
+
 [SONARR]
 ENABLED = no
 HOST = http://localhost:8989
